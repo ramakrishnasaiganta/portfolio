@@ -3,112 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Viewer</title>
-    <style>
-        #pdf-viewer {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-        }
-        canvas {
-            border: 1px solid black;
-            margin: auto;
-        }
-    </style>
+    <title>RKresume</title>
 </head>
 <body>
-    <div id="pdf-viewer">
-        <canvas id="pdf-canvas"></canvas>
-        <div>
-            <button id="prev-page">Previous Page</button>
-            <span>Page: <span id="page-num"></span> / <span id="page-count"></span></span>
-            <button id="next-page">Next Page</button>
-        </div>
-    </div>
-
-    <script src="pdfjs/pdf.js"></script>
-    <script src="pdfjs/pdf.worker.js"></script>
-    <script>
-        const url = 'img/resume3.pdf'; // Specify your PDF file's URL here
-        let pdfDoc = null,
-            pageNum = 1,
-            pageIsRendering = false,
-            pageNumPending = null;
-
-        const scale = 1.5, // Set the zoom level
-              canvas = document.querySelector('#pdf-canvas'),
-              ctx = canvas.getContext('2d');
-
-        // Render the page
-        const renderPage = num => {
-            pageIsRendering = true;
-
-            // Get the page
-            pdfDoc.getPage(num).then(page => {
-                const viewport = page.getViewport({ scale });
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-
-                const renderContext = {
-                    canvasContext: ctx,
-                    viewport
-                };
-
-                const renderTask = page.render(renderContext);
-
-                renderTask.promise.then(() => {
-                    pageIsRendering = false;
-
-                    if (pageNumPending !== null) {
-                        renderPage(pageNumPending);
-                        pageNumPending = null;
-                    }
-                });
-
-                // Update page counters
-                document.querySelector('#page-num').textContent = num;
-            });
-        };
-
-        // Check for pages that are pending to render
-        const queueRenderPage = num => {
-            if (pageIsRendering) {
-                pageNumPending = num;
-            } else {
-                renderPage(num);
-            }
-        };
-
-        // Show previous page
-        const showPrevPage = () => {
-            if (pageNum <= 1) {
-                return;
-            }
-            pageNum--;
-            queueRenderPage(pageNum);
-        };
-
-        // Show next page
-        const showNextPage = () => {
-            if (pageNum >= pdfDoc.numPages) {
-                return;
-            }
-            pageNum++;
-            queueRenderPage(pageNum);
-        };
-
-        // Load the PDF document
-        pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
-            pdfDoc = pdfDoc_;
-            document.querySelector('#page-count').textContent = pdfDoc.numPages;
-
-            // Render the first page
-            renderPage(pageNum);
-        });
-
-        // Button events
-        document.querySelector('#prev-page').addEventListener('click', showPrevPage);
-        document.querySelector('#next-page').addEventListener('click', showNextPage);
-    </script>
+    <h1>RK</h1>
+    <object data="img/resume.pdf" type="application/pdf" width="100%" height="1000px">
+        <p>It appears you don't have a PDF plugin for this browser. No worries, you can <a href="img/resume.pdf">click here to download the PDF file.</a></p>
+    </object>
 </body>
 </html>
