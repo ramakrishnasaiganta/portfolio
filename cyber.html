@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>RK | Cyber Security Engineer & Ethical Hacker</title>
+  <meta name="description" content="Rama Krishna Sai Ganta - Cybersecurity Engineer, Ethical Hacker, and Full-Stack Developer. Specializing in penetration testing, threat hunting, and secure development for UK & US markets.">
+  <meta name="keywords" content="Cybersecurity, Ethical Hacker, Penetration Tester, Security Analyst, Full-Stack Developer, UK Tech Jobs, US Tech Jobs, Portfolio">
+  <meta name="author" content="Rama Krishna Sai Ganta">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="RK | Cyber Security & Ethical Hacking Portfolio">
+  <meta property="og:description" content="Offensive Security Professional | Bug Bounty Hunter | Secure Code Expert">
+  <meta property="og:image" content="https://placehold.co/1200x630/0a0c0f/00ff41?text=0x524B">
+  <meta property="og:type" content="website">
+  
+  <!-- Fonts - Hacking/Cyber Theme -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Space Grotesk', 'Fira Code', monospace;
+      background-color: #050b12;
+      color: #b3ffcf;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* DYNAMIC MATRIX RAIN BACKGROUND (Canvas) */
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      opacity: 0.28;
+      pointer-events: none;
+    }
+
+    /* Glitch overlay effect */
+    .glitch-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(0deg, rgba(0,255,65,0.03) 0px, rgba(0,255,65,0.03) 2px, transparent 2px, transparent 6px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .binary-bg {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 30%, #021a0f, #010408);
+      z-index: -3;
+    }
+
+    /* Neon scanline */
+    .scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 65, 0.03) 50%);
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 2;
+      animation: scan 8s linear infinite;
+    }
+    @keyframes scan {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 15, 10, 0.9);
+      backdrop-filter: blur(12px);
+      border: 1px solid #00ff41;
+      border-radius: 8px;
+      padding: 0.6rem 2rem;
+      z-index: 1000;
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+      font-family: 'Share Tech Mono', monospace;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #0f0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #fff;
+      text-shadow: 0 0 8px #0f0;
+      border-bottom: 1px solid #0f0;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 0;
+      border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+      position: relative;
+    }
+
+    .hero-section {
+      justify-content: center;
+      text-align: left;
+    }
+    .terminal-prompt {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.2rem;
+      color: #0f0;
+      margin-bottom: 1rem;
+    }
+    .cursor-blink {
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .hero-content h1 {
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      font-weight: 700;
+      font-family: 'Fira Code', monospace;
+      background: linear-gradient(95deg, #00ff41, #00cc33, #00ff99);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(0,255,65,0.5);
+      letter-spacing: -1px;
+    }
+    .hero-glow {
+      font-size: 1.2rem;
+      color: #8affb3;
+      max-width: 650px;
+      margin: 1.5rem 0;
+      border-left: 3px solid #0f0;
+      padding-left: 1.2rem;
+      font-family: 'Space Grotesk', monospace;
+    }
+    .btn-group {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .btn-primary, .btn-outline {
+      padding: 12px 28px;
+      font-family: 'Share Tech Mono', monospace;
+      font-weight: 600;
+      transition: 0.25s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .btn-primary {
+      background: #0f0;
+      color: #000;
+      border: none;
+      box-shadow: 0 0 12px rgba(0,255,65,0.6);
+    }
+    .btn-primary:hover {
+      background: #0c0;
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px #0f0;
+    }
+    .btn-outline {
+      border: 1px solid #0f0;
+      color: #0f0;
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: rgba(0,255,65,0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 0 12px rgba(0,255,65,0.4);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-weight: 600;
+      margin-bottom: 2.5rem;
+      position: relative;
+      display: inline-block;
+      letter-spacing: 2px;
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+    }
+    .section-title:before {
+      content: "# ";
+      color: #0f0;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #0f0, transparent);
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .skill-chip {
+      background: rgba(0, 255, 65, 0.08);
+      border: 1px solid #0f0;
+      padding: 0.7rem 1.5rem;
+      border-radius: 4px;
+      font-family: 'Fira Code', monospace;
+      font-weight: 500;
+      transition: all 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .skill-chip:hover {
+      background: #0f0;
+      color: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 0 15px #0f0;
+      cursor: default;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .project-card {
+      background: rgba(0, 20, 12, 0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 8px;
+      padding: 1.8rem;
+      border-left: 4px solid #0f0;
+      transition: all 0.3s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px -10px #0f0;
+      background: rgba(0, 30, 18, 0.8);
+    }
+    .project-icon {
+      font-size: 2.2rem;
+      color: #0f0;
+      margin-bottom: 1rem;
+    }
+    .tech-stack span {
+      font-size: 0.7rem;
+      background: rgba(0,255,65,0.2);
+      padding: 0.25rem 0.8rem;
+      border-radius: 20px;
+      font-family: monospace;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .exp-item {
+      border-left: 2px solid #0f0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .exp-item::before {
+      content: '>';
+      position: absolute;
+      left: -12px;
+      top: -2px;
+      color: #0f0;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .exp-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: 'Fira Code', monospace;
+    }
+    .exp-company {
+      color: #0f0;
+      margin: 0.2rem 0;
+    }
+
+    .contact-flex {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .contact-form {
+      flex: 1.2;
+    }
+    .contact-info {
+      flex: 0.8;
+    }
+    input, textarea {
+      width: 100%;
+      background: rgba(0, 20, 10, 0.8);
+      border: 1px solid #0f0;
+      border-radius: 4px;
+      padding: 1rem;
+      color: #0f0;
+      font-family: 'Fira Code', monospace;
+      transition: 0.2s;
+      margin-bottom: 1rem;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      box-shadow: 0 0 12px #0f0;
+      background: #021a0a;
+    }
+    button[type="submit"] {
+      background: #0f0;
+      color: #000;
+      border: none;
+      padding: 12px 28px;
+      font-family: 'Share Tech Mono', monospace;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      border-radius: 4px;
+      width: 100%;
+    }
+    button[type="submit"]:hover {
+      background: #0c0;
+      box-shadow: 0 0 15px #0f0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(0,255,65,0.2);
+      font-family: monospace;
+    }
+    .social-links-footer a {
+      color: #0f0;
+      font-size: 1.5rem;
+      margin: 0 0.8rem;
+      transition: 0.2s;
+      display: inline-block;
+    }
+    .social-links-footer a:hover {
+      transform: translateY(-3px);
+      text-shadow: 0 0 10px #0f0;
+    }
+    @media (max-width: 768px) {
+      nav { width: 95%; padding: 0.5rem 1rem; }
+      .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+      .container { padding: 0 1.2rem; }
+    }
+    ::selection {
+      background: #0f0;
+      color: #000;
+    }
+    .status-badge {
+      font-family: monospace;
+      background: #0f0;
+      color: black;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="binary-bg"></div>
+  <canvas id="matrix-canvas"></canvas>
+  <div class="glitch-overlay"></div>
+  <div class="scanline"></div>
+
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-link active">>_Home</a></li>
+      <li><a href="#about" class="nav-link">>_About</a></li>
+      <li><a href="#skills" class="nav-link">>_Skills</a></li>
+      <li><a href="#projects" class="nav-link">>_Exploits</a></li>
+      <li><a href="#experience" class="nav-link">>_Timeline</a></li>
+      <li><a href="#contact" class="nav-link">>_Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Hero Section - Imported Identity -->
+    <section id="home" class="hero-section">
+      <div class="container" data-aos="fade-up" data-aos-duration="1000">
+        <div class="hero-content">
+          <div class="terminal-prompt">
+            <span class="status-badge">ROOT@RK-PENTEST:~$</span> <span style="color:#0f0;">whoami</span>
+          </div>
+          <h1>Rama Krishna Sai Ganta<br><span style="font-size: 1.8rem;">[ Cyber Hygiene | Full-Stack Developer ]</span></h1>
+          <p class="hero-glow">>_ A dedicated and results-driven professional with a strong foundation in web development, data analytics, and cybersecurity. Passionate about leveraging technology to drive innovative solutions, streamline operations, and deliver exceptional value. Committed to continuous learning and adaptability. Cybersecurity & Web Developer.</p>
+          <div class="btn-group">
+            <a href="#contact" class="btn-primary"><i class="fas fa-skull"></i> Hack The Job</a>
+            <a href="#projects" class="btn-outline"><i class="fas fa-terminal"></i> View Exploits</a>
+            <a href="pdf.html" target="_blank" class="btn-outline"><i class="fas fa-file-code"></i> Resume.sec</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section - Imported Bio -->
+    <section id="about">
+      <div class="container" data-aos="fade-right">
+        <h2 class="section-title">about_me</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+          <div style="flex: 1.5;">
+            <p><i class="fas fa-angle-right" style="color:#0f0;"></i> I am a dedicated and results-driven professional with a strong foundation in web development, data analytics, and cybersecurity. My passion lies in leveraging technology to drive innovative solutions, streamline operations, and deliver exceptional value. With a commitment to continuous learning and adaptability, I bring a proven ability to master new tools and technologies swiftly.</p>
+            <p style="margin-top: 0.8rem;"><i class="fas fa-angle-right" style="color:#0f0;"></i> A proactive and innovative professional with a passion for solving complex challenges and driving impactful results. With a strong foundation in full-stack development and cybersecurity, I am committed to continuous learning and skill enhancement to stay ahead in the dynamic tech landscape. Thriving in collaborative environments, I bring a blend of technical expertise, creativity, and strategic thinking to deliver innovative solutions and achieve collective success.</p>
+            <p style="margin-top: 0.8rem;"><i class="fas fa-angle-right" style="color:#0f0;"></i> I aim to leverage my expertise and skills to contribute effectively to organizational success while fostering a long-term, mutually beneficial relationship. With a commitment to excellence and a dedication to delivering value, I strive to align my efforts with the strategic objectives of the organization, ensuring sustained growth and innovation.</p>
+            <div class="skills-grid" style="margin-top: 1.5rem;">
+              <span class="skill-chip">#Freelancer</span>
+              <span class="skill-chip">#FullStack</span>
+              <span class="skill-chip">#CyberHygiene</span>
+              <span class="skill-chip">#DataAnalytics</span>
+            </div>
+          </div>
+          <div style="flex: 0.7; text-align: center;">
+            <div style="border: 2px solid #0f0; border-radius: 8px; padding: 1rem; background: #021a0a;">
+              <i class="fas fa-user-secret" style="font-size: 6rem; color:#0f0;"></i>
+              <p style="font-family: monospace;">[ root@RK:~$ ]</p>
+              <p><span class="status-badge">Available for Freelance</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section - Imported Technical Arsenal -->
+    <section id="skills">
+      <div class="container" data-aos="zoom-in">
+        <h2 class="section-title">arsenal_&_tools</h2>
+        <div class="skills-grid" style="gap: 1rem;">
+          <span class="skill-chip">HTML (100%)</span><span class="skill-chip">CSS (90%)</span><span class="skill-chip">JavaScript (75%)</span>
+          <span class="skill-chip">Python (85%)</span><span class="skill-chip">React.js (80%)</span><span class="skill-chip">WordPress/CMS (90%)</span>
+          <span class="skill-chip">Atlassian Jira (85%)</span><span class="skill-chip">Cybersecurity (80%)</span><span class="skill-chip">Kali Linux</span>
+          <span class="skill-chip">Burp Suite</span><span class="skill-chip">Power BI</span><span class="skill-chip">Advanced MS Excel</span>
+          <span class="skill-chip">Node.js/Express.js</span><span class="skill-chip">AWS/Ubuntu/Nginx</span><span class="skill-chip">Generative AI</span>
+        </div>
+        <div style="margin-top: 3rem; display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <div style="background: rgba(0,255,65,0.05); padding: 1.2rem; border-left: 3px solid #0f0; flex:1;">
+            <i class="fas fa-chart-line"></i> <strong>Data Analytics & Tools:</strong> Power BI, Advanced MS Excel.
+          </div>
+          <div style="background: rgba(0,255,65,0.05); padding: 1.2rem; border-left: 3px solid #0f0; flex:1;">
+            <i class="fas fa-cloud-upload-alt"></i> <strong>Cloud & Productivity:</strong> Google Tools, Cloud Services, DNS Confirmation.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects - Imported Focus -->
+    <section id="projects">
+      <div class="container" data-aos="fade-up">
+        <h2 class="section-title">exploit_labs</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-shield-virus"></i></div>
+            <h3>Web Application Pentesting</h3>
+            <p>Comprehensive security assessment of modern web applications. Identifying OWASP Top 10 vulnerabilities and implementing secure coding practices in development pipelines.</p>
+            <div class="tech-stack"><span>Burp Suite</span><span>OWASP ZAP</span><span>Python</span></div>
+            <a href="#" class="case-study-link" style="color:#0f0; text-decoration: none;">[ case study ] <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-database"></i></div>
+            <h3>Full-Stack Security Integration</h3>
+            <p>Developed secure full-stack applications with React.js, Node.js, and Express.js. Integrated authentication, authorization, and data protection layers for enterprise solutions.</p>
+            <div class="tech-stack"><span>MERN</span><span>JWT</span><span>Helmet.js</span></div>
+            <a href="#" class="case-study-link" style="color:#0f0; text-decoration: none;">[ GitHub Repo ] <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-chart-pie"></i></div>
+            <h3>Data Analytics Dashboard</h3>
+            <p>Designed interactive dashboards using Power BI. Analyzed cybersecurity metrics and threat patterns to derive actionable insights for organizational defense strategies.</p>
+            <div class="tech-stack"><span>Power BI</span><span>MS Excel</span><span>DAX</span></div>
+            <a href="#" class="case-study-link" style="color:#0f0; text-decoration: none;">[ writeup ] <i class="fas fa-search"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience / Timeline - Provided Background -->
+    <section id="experience">
+      <div class="container" data-aos="fade-left">
+        <h2 class="section-title">timeline_&_ops</h2>
+        <div class="timeline">
+          <div class="exp-item">
+            <div class="exp-title">Full-Stack Developer & Security Consultant</div>
+            <div class="exp-company">Freelance (Global Clients) | 2021 – Present</div>
+            <p>Delivered end-to-end web solutions with integrated security protocols. Managed up to 5 projects concurrently while consulting on cybersecurity best practices for client infrastructures.</p>
+          </div>
+          <div class="exp-item">
+            <div class="exp-title">Cybersecurity Analyst & Digital Marketing Analyst</div>
+            <div class="exp-company">Independent Professional | 2022 – Present</div>
+            <p>Performed vulnerability assessments using Kali Linux and Burp Suite. Analyzed digital marketing data to optimize campaigns while ensuring data privacy and compliance standards.</p>
+          </div>
+          <div class="exp-item">
+            <div class="exp-title">B.Tech Graduate - Computer Science</div>
+            <div class="exp-company">Bachelor of Technology | 2019 – 2023</div>
+            <p>Graduated with specialization in full-stack development and cybersecurity fundamentals. Completed capstone projects on web application security and real-time data analytics.</p>
+          </div>
+        </div>
+        <div style="margin-top: 2rem; background: rgba(0,255,65,0.1); padding: 1.2rem; border-radius: 8px;">
+          <i class="fas fa-flag-checkered"></i> <strong>Current Objective:</strong> Seeking full-time Cybersecurity Engineer / Full-Stack Developer roles in global markets (Open to UK/US). Let's build secure, scalable, and impactful solutions.
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section - Imported Details -->
+    <section id="contact">
+      <div class="container" data-aos="flip-up">
+        <h2 class="section-title">contact_&_pgp</h2>
+        <div class="contact-flex">
+          <div class="contact-info">
+            <h3><i class="fas fa-envelope"></i> Secure Channel</h3>
+            <p><i class="fas fa-phone-alt"></i> <a href="tel:+917995081439" style="color:#0f0;">+91 7995081439</a><br>
+            <i class="fas fa-envelope"></i> <a href="mailto:ramakrishnasaiganta@gmail.com" style="color:#0f0;">ramakrishnasaiganta@gmail.com</a><br>
+            <i class="fas fa-envelope"></i> <a href="mailto:admin@ramakrishnasaiganta.info" style="color:#0f0;">admin@ramakrishnasaiganta.info</a><br>
+            <i class="fab fa-key"></i> PGP: 0xA1B2 C3D4 — <span style="font-family:monospace;">[Available on request]</span></p>
+            <div style="margin-top: 1.5rem;">
+              <i class="fas fa-globe"></i> <a href="https://www.ramakrishnasaiganta.info" target="_blank" style="color:#0f0;">www.ramakrishnasaiganta.info</a><br>
+              <i class="fab fa-github"></i> <a href="#" style="color:#0f0;">/rk-cybersec</a><br>
+              <i class="fab fa-linkedin"></i> <a href="#" style="color:#0f0;">in/ramakrishna-sai</a>
+            </div>
+            <div style="margin-top: 1rem;">
+              <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> Guntur, Andhra Pradesh, India</p>
+              <p><i class="fas fa-calendar-alt"></i> <strong>Age:</strong> 23 | <strong>Degree:</strong> B.Tech</p>
+            </div>
+          </div>
+          <div class="contact-form">
+            <form id="cyberForm">
+              <input type="text" id="name" placeholder="[ alias / handle ]" required>
+              <input type="email" id="email" placeholder="encrypted@channel.com" required>
+              <textarea id="message" rows="4" placeholder=">_ Inject your message ..." required></textarea>
+              <button type="submit"><i class="fas fa-lock"></i> Send encrypted tick</button>
+            </form>
+            <p id="formFeedback" style="margin-top: 0.8rem; font-size:0.8rem; color:#0f0;"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="social-links-footer">
+      <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="Website"><i class="fas fa-globe"></i></a>
+    </div>
+    <p style="margin-top: 1rem;">© 2025 Rama Krishna Sai Ganta | root@cyberspace — [ 0x57 0x45 0x42 ]</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // ======================= MATRIX RAIN EFFECT =======================
+    const canvas = document.getElementById('matrix-canvas');
+    let ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    let drops = [];
+    const matrixChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+{}:<>?~";
+    
+    function initMatrix() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      const columnCount = Math.floor(width / 25);
+      drops = [];
+      for (let i = 0; i < columnCount; i++) {
+        drops[i] = Math.floor(Math.random() * -height);
+      }
+    }
+    
+    function drawMatrix() {
+      if (!ctx) return;
+      ctx.fillStyle = "rgba(5, 11, 18, 0.05)";
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = "#0f0";
+      ctx.font = "16px 'Fira Code', monospace";
+      for (let i = 0; i < drops.length; i++) {
+        const char = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        const x = i * 25;
+        const y = drops[i] * 20;
+        if (y > 0 && y < height) {
+          ctx.fillStyle = `rgba(0, 255, 65, ${Math.random() * 0.5 + 0.4})`;
+          ctx.fillText(char, x, y);
+        }
+        if (drops[i] * 20 > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+      requestAnimationFrame(drawMatrix);
+    }
+    
+    window.addEventListener('resize', () => {
+      initMatrix();
+    });
+    initMatrix();
+    drawMatrix();
+
+    // ========= AOS INIT ==========
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 120
+    });
+
+    // ========= ACTIVE NAVIGATION ON SCROLL ==========
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    function setActiveLink() {
+      let current = '';
+      const scrollPos = window.scrollY + 150;
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href').substring(1);
+        if (href === current) {
+          link.classList.add('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', setActiveLink);
+    setActiveLink();
+
+    // ========= INTERACTIVE LINKS & FORM HANDLING ==========
+    const caseStudyLinks = document.querySelectorAll('.case-study-link');
+    caseStudyLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert("🔓 Full exploit write-up & source code available upon non-disclosure request. Contact for detailed case study.");
+      });
+    });
+    
+    const contactForm = document.getElementById('cyberForm');
+    const formFeedback = document.getElementById('formFeedback');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+        if (!name || !email || !message) {
+          formFeedback.innerHTML = "<i class='fas fa-exclamation-triangle'></i> [ERROR] All fields required for encrypted transmission.";
+          formFeedback.style.color = "#ff5555";
+          setTimeout(() => { formFeedback.innerHTML = ""; }, 2500);
+          return;
+        }
+        // Simulate secure submission
+        formFeedback.innerHTML = "<i class='fas fa-check-circle'></i> [✔] Encrypted tick received. RK will reply within 24h on secure channel.";
+        formFeedback.style.color = "#0f0";
+        contactForm.reset();
+        setTimeout(() => { formFeedback.innerHTML = ""; }, 4000);
+      });
+    }
+    
+    // Social links placeholder alert
+    const socialPlaceholders = document.querySelectorAll('.social-links-footer a, .contact-info a');
+    socialPlaceholders.forEach(link => {
+      if (link.getAttribute('href') === '#') {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          alert("🌐 Live social profiles coming soon. Meanwhile, email for authentic connection.");
+        });
+      }
+    });
+  </script>
+</body>
+</html>
